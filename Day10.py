@@ -46,4 +46,3 @@ for ch in b:
 e = input("enter a string:")
 print("uppercase:", e.upper())
 print("lowercase:",e.lower())
-
