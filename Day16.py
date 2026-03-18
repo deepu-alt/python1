@@ -12,7 +12,7 @@ print(uniqueOccurrences(arr))
 #solution 2
 from collections import Counter
 
-def uniqueOccurrences(arr);
+def uniqueOccurrences(arr):
     freq = Counter(arr)
     return len(freq.vqlues()) == len(set(freq.values()))
 # solution 3
@@ -28,4 +28,4 @@ if len(count) == len(set(count)):
     print(True)
 else:
     print(False)
-    
+
