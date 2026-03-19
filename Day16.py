@@ -29,3 +29,18 @@ if len(count) == len(set(count)):
 else:
     print(False)
 
+#solution 4
+arr = [1, 2, 2, 1, 1, 3]
+freq = {}
+
+for num in arr:
+    if num in freq:
+        freq[num] += 1
+    else:
+        freq[num] = 1
+count = list(freq.values())
+if len(count) == len(set(count)):
+    print(True)
+else:
+    print(False)
+
