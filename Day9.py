@@ -1,3 +1,5 @@
+# a string is sequence of characters (letters, numbers, symbols, spaces) enclosed in quotes.
+
 numbers = [10, 7, 4, 9,12]
 
 for num in numbers:
