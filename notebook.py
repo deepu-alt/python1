@@ -249,6 +249,12 @@ tuple is written in paranthasis ()and also separated with kamma(,)
 .. count() ->used to count the value
 .. index() ->used to find index value
 
+-->day 10 
+-> set : a set is a collection of unique (no duplicates) and unordered elements
+a set is mutable(can change)
+a set is written in between curly braces {} or using set() function
+to find symmetric differnce between two sets we use (^) operator 
+
 
 
 """
