@@ -113,3 +113,22 @@ while largest % smallest != 0:
 
 print(smallest)   # Output: 2    
 
+# intersection of three lists
+a = [1,2,3]
+b = [2,3,4]
+c = [2,3,5]
+
+result = set(a) & set(b) & set(c)
+print(result)
+
+#smallest missing positive number
+lst = [1,2,0]
+
+s = set(lst)
+i = 1
+
+while True:
+    if i not in s:
+        print(i)
+        break
+    i += 1
