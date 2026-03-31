@@ -132,3 +132,44 @@ while True:
         print(i)
         break
     i += 1
+    
+#set mismatch
+class Solution:
+    def findErrorNums(self, nums):
+        n = len(nums)
+        seen = set()
+        dup = -1
+        missing = -1
+
+        # Find duplicate
+        for num in nums:
+            if num in seen:
+                dup = num
+            seen.add(num)
+
+        # Find missing
+        for i in range(1, n + 1):
+            if i not in seen:
+                missing = i
+                break
+
+        return [dup, missing]    
+
+#number of sets of k non - overlapping line segments
+class Solution:
+    def numberOfSets(self, n, k):
+        MOD = 10**9 + 7
+
+        fact = [1] * (n + k + 1)
+        for i in range(1, n + k):
+            fact[i] = fact[i - 1] * i % MOD
+
+        def modinv(x):
+            return pow(x, MOD - 2, MOD)
+
+        def nCr(n, r):
+            if r > n:
+                return 0
+            return fact[n] * modinv(fact[r]) % MOD * modinv(fact[n - r]) % MOD
+
+        return nCr(n + k - 1, 2 * k)    
