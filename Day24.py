@@ -20,5 +20,3 @@ while True:
         break
     i += 1
 
-#print even numbers
-    
