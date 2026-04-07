@@ -32,3 +32,62 @@ class Solution:
             max_length = max(max_length, right - left + 1)
         
         return max_length    
+
+#median of two sorted arrays
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        # Ensure nums1 is the smaller array
+        if len(nums1) > len(nums2):
+            nums1, nums2 = nums2, nums1
+        
+        m, n = len(nums1), len(nums2)
+        left, right = 0, m
+        
+        while left <= right:
+            partition1 = (left + right) // 2
+            partition2 = (m + n + 1) // 2 - partition1
+            
+            maxLeft1 = float('-inf') if partition1 == 0 else nums1[partition1 - 1]
+            minRight1 = float('inf') if partition1 == m else nums1[partition1]
+            
+            maxLeft2 = float('-inf') if partition2 == 0 else nums2[partition2 - 1]
+            minRight2 = float('inf') if partition2 == n else nums2[partition2]
+            
+            # Check if correct partition is found
+            if maxLeft1 <= minRight2 and maxLeft2 <= minRight1:
+                # Odd length
+                if (m + n) % 2 == 1:
+                    return float(max(maxLeft1, maxLeft2))
+                # Even length
+                return (max(maxLeft1, maxLeft2) + min(minRight1, minRight2)) / 2.0
+            
+            elif maxLeft1 > minRight2:
+                right = partition1 - 1
+            else:
+                left = partition1 + 1
+
+#longest palindromic substring
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        if not s:
+            return ""
+        
+        start, end = 0, 0
+        
+        def expand(left: int, right: int) -> int:
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return right - left - 1  # length of palindrome
+        
+        for i in range(len(s)):
+            len1 = expand(i, i)       # Odd length palindrome
+            len2 = expand(i, i + 1)   # Even length palindrome
+            
+            max_len = max(len1, len2)
+            
+            if max_len > (end - start):
+                start = i - (max_len - 1) // 2
+                end = i + max_len // 2
+        
+        return s[start:end + 1]                        
