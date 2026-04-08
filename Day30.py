@@ -90,4 +90,54 @@ class Solution:
                 start = i - (max_len - 1) // 2
                 end = i + max_len // 2
         
-        return s[start:end + 1]                        
+        return s[start:end + 1]       
+
+# zigzag conversion
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        # Edge case
+        if numRows == 1 or numRows >= len(s):
+            return s
+        
+        rows = [""] * numRows
+        current_row = 0
+        going_down = False
+        
+        for char in s:
+            rows[current_row] += char
+            
+            # Change direction at top or bottom
+            if current_row == 0 or current_row == numRows - 1:
+                going_down = not going_down
+            
+            current_row += 1 if going_down else -1
+        
+        return "".join(rows)
+
+
+ # reverse integer
+class Solution:
+    def reverse(self, x: int) -> int:
+        rev = 0
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        
+        while x != 0:
+            # Extract last digit
+            digit = int(x % 10)
+            
+            # Handle negative numbers correctly
+            if x < 0 and digit > 0:
+                digit -= 10
+            
+            x = (x - digit) // 10
+            
+            # Check for overflow before multiplying
+            if rev > INT_MAX // 10 or (rev == INT_MAX // 10 and digit > 7):
+                return 0
+            if rev < INT_MIN // 10 or (rev == INT_MIN // 10 and digit < -8):
+                return 0
+            
+            rev = rev * 10 + digit
+        
+        return rev                            
