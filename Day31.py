@@ -255,4 +255,25 @@ class Solution:
         # Remove nth node
         slow.next = slow.next.next
         
-        return dummy.next                
+        return dummy.next        
+        
+
+# valid Parentheses
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        mapping = {
+            ')': '(',
+            '}': '{',
+            ']': '['
+        }
+        
+        for char in s:
+            if char in mapping:  # closing bracket
+                top = stack.pop() if stack else '#'
+                if mapping[char] != top:
+                    return False
+            else:  # opening bracket
+                stack.append(char)
+        
+        return not stack        
