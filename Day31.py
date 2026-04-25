@@ -358,4 +358,33 @@ class Solution:
             if node.next:
                 heapq.heappush(heap, (node.next.val, i, node.next))
         
-        return dummy.next                
+        return dummy.next          
+
+
+# swap nodes in pairs      
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = dummy
+        
+        while head and head.next:
+            first = head
+            second = head.next
+            
+            # Swapping
+            prev.next = second
+            first.next = second.next
+            second.next = first
+            
+            # Move pointers forward
+            prev = first
+            head = first.next
+        
+        return dummy.next
