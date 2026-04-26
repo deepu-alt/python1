@@ -388,3 +388,40 @@ class Solution:
             head = first.next
         
         return dummy.next
+
+
+#reverse node i n K - group
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        
+        # Step 1: Check if there are at least k nodes
+        count = 0
+        temp = head
+        while temp and count < k:
+            temp = temp.next
+            count += 1
+        
+        # If we have k nodes, reverse them
+        if count == k:
+            prev = None
+            curr = head
+            
+            for _ in range(k):
+                next_node = curr.next
+                curr.next = prev
+                prev = curr
+                curr = next_node
+            
+            # Step 3: Recursively process remaining nodes
+            head.next = self.reverseKGroup(curr, k)
+            
+            return prev
+        
+        # If less than k nodes, return head as it is
+        return head
