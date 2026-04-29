@@ -460,3 +460,36 @@ class Solution:
                     max_len = max(max_len, i - stack[-1])
 
         return max_len
+
+#divide two integres
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        # Constants for 32-bit integer limits
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        
+        # Edge case: overflow
+        if dividend == INT_MIN and divisor == -1:
+            return INT_MAX
+        
+        # Determine sign of result
+        negative = (dividend < 0) ^ (divisor < 0)
+        
+        # Work with positive values
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+        
+        quotient = 0
+        
+        # Bit manipulation approach
+        for i in range(31, -1, -1):
+            if (dividend >> i) >= divisor:
+                quotient += (1 << i)
+                dividend -= (divisor << i)
+        
+        # Apply sign
+        if negative:
+            quotient = -quotient
+        
+        # Clamp result within 32-bit range
+        return max(INT_MIN, min(INT_MAX, quotient))
