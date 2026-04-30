@@ -493,3 +493,44 @@ class Solution:
         
         # Clamp result within 32-bit range
         return max(INT_MIN, min(INT_MAX, quotient))
+
+#substring with concatenation of all words
+from collections import Counter
+
+class Solution:
+    def findSubstring(self, s, words):
+        if not s or not words:
+            return []
+        
+        word_len = len(words[0])
+        total_words = len(words)
+        word_map = Counter(words)
+        result = []
+        
+        for i in range(word_len):
+            left = i
+            count = 0
+            current_map = Counter()
+            
+            for right in range(i, len(s) - word_len + 1, word_len):
+                word = s[right:right + word_len]
+                
+                if word in word_map:
+                    current_map[word] += 1
+                    count += 1
+                    
+                    while current_map[word] > word_map[word]:
+                        left_word = s[left:left + word_len]
+                        current_map[left_word] -= 1
+                        left += word_len
+                        count -= 1
+                    
+                    if count == total_words:
+                        result.append(left)
+                
+                else:
+                    current_map.clear()
+                    count = 0
+                    left = right + word_len
+        
+        return result
