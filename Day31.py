@@ -1,14 +1,11 @@
-#Regular expression matching
+# Definition for singly-linked list.
 class Solution:
-    def isMatch(self, s: str, p: str) -> bool:
+    def isMatch(self, s, p):
         m, n = len(s), len(p)
         
-        # dp[i][j] means s[0:i] matches p[0:j]
         dp = [[False] * (n + 1) for _ in range(m + 1)]
+        dp[0][0] = True
         
-        dp[0][0] = True  # empty string matches empty pattern
-        
-        # Handle patterns like a*, a*b*, a*b*c*
         for j in range(2, n + 1):
             if p[j - 1] == '*':
                 dp[0][j] = dp[0][j - 2]
@@ -16,20 +13,27 @@ class Solution:
         for i in range(1, m + 1):
             for j in range(1, n + 1):
                 
-                # Case 1: direct match or '.'
                 if p[j - 1] == s[i - 1] or p[j - 1] == '.':
                     dp[i][j] = dp[i - 1][j - 1]
                 
-                # Case 2: '*'
                 elif p[j - 1] == '*':
-                    # zero occurrence
                     dp[i][j] = dp[i][j - 2]
                     
-                    # one or more occurrence
                     if p[j - 2] == s[i - 1] or p[j - 2] == '.':
                         dp[i][j] = dp[i][j] or dp[i - 1][j]
-        
+                
+                print(f"dp[{i}][{j}] = {dp[i][j]}")
+
+        print("\nFinal DP Table:")        
+        for i in range(m + 1):
+            print(dp[i])
+
         return dp[m][n]
+
+
+# 👇 MUST CALL FUNCTION
+sol = Solution()
+print("Result:", sol.isMatch("aab", "c*a*b"))
 
 # container with most water
 class Solution:
@@ -87,7 +91,7 @@ class Solution:
 
 #find longest common factor
 class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -> str:
+    def longestCommonPrefix(self, strs):
         if not strs:
             return ""
         
@@ -369,7 +373,7 @@ class Solution:
 #         self.next = next
 
 class Solution:
-    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def swapPairs(self, head):
         dummy = ListNode(0)
         dummy.next = head
         prev = dummy
@@ -398,7 +402,7 @@ class Solution:
 #         self.next = next
 
 class Solution:
-    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+    def reverseKGroup(self, head, k):
         
         # Step 1: Check if there are at least k nodes
         count = 0
@@ -428,7 +432,7 @@ class Solution:
 
 # remove duplicates from sorted array
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
+    def removeDuplicates(self, nums):
         if not nums:
             return 0
         
