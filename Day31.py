@@ -667,7 +667,7 @@ class Solution:
         cols = [set() for _ in range(9)]
         boxes = [set() for _ in range(9)]
 
-        for in range(9):
+        for i in range(9):
             for j in range(9):
                 val = board[i][j]
                 if val == '.':
