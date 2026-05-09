@@ -761,3 +761,25 @@ class Solution:
         result += str(count) + prev[-1]
         
         return result
+
+#combination sum
+class Solution:
+    def combinationSum(self, candidates, target):
+        result = []
+        candidates.sort()
+        self.backtrack(candidates, target, 0, [], result)
+        return result
+
+    def backtrack(self, candidates, target, start, path, result):
+        if target == 0:
+            result.append(path[:])
+            return
+
+        for i in range(start, len(candidates)):
+            if candidates[i] > target:
+                break
+            path.append(candidates[i])
+            self.backtrack(candidates, target - candidates[i], i, path, result)
+            path.pop()
+
+    
