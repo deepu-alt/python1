@@ -804,3 +804,20 @@ class Solution:
             path.append(candidates[i])
             self.backtrack(candidates, target - candidates[i], i + 1, path, result)
             path.pop()
+
+# first missing positive
+class Solution:
+    def firstMissingPositive(self, nums):
+        n = len(nums)
+        
+        for i in range(n):
+            while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+                # Swap nums[i] with the correct position
+                correct_pos = nums[i] - 1
+                nums[i], nums[correct_pos] = nums[correct_pos], nums[i]
+        
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+        
+        return n + 1
