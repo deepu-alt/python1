@@ -891,3 +891,19 @@ class Solution:
                         dp[i][j] = dp[i][j] or dp[i - 1][j]
 
         return dp[m][n]
+
+#jump game 2
+class Solution:
+    def jump(self, nums):
+        jumps = 0
+        current_end = 0
+        farthest = 0
+        
+        for i in range(len(nums) - 1):
+            farthest = max(farthest, i + nums[i])
+            
+            if i == current_end:
+                jumps += 1
+                current_end = farthest
+        
+        return jumps
