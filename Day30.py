@@ -5,7 +5,7 @@
 #         self.next = next
 # Reverse linked list
 class Solution:
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def reverseList(self, head):
         prev = None
         curr = head
         
@@ -35,7 +35,7 @@ class Solution:
 
 #median of two sorted arrays
 class Solution:
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    def findMedianSortedArrays(self, nums1, nums2):
         # Ensure nums1 is the smaller array
         if len(nums1) > len(nums2):
             nums1, nums2 = nums2, nums1
@@ -192,4 +192,5 @@ class Solution:
             x //= 10
         
         # Check for even and odd length numbers
-        return x == reversed_half or x == reversed_half // 10        
+        return x == reversed_half or x == reversed_half // 10
+            
