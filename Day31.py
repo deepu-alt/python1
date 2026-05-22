@@ -1019,4 +1019,39 @@ class Solution:
                 return False
         
         return True
+#n queens 2
+class Solution:
+    def totalNQueens(self, n):
+        self.count = 0
+        board = [["."] * n for _ in range(n)]
+        self.backtrack(board, 0)
+        return self.count
+
+    def backtrack(self, board, row):
+        if row == len(board):
+            self.count += 1
+            return
         
+        for col in range(len(board)):
+            if self.isSafe(board, row, col):
+                board[row][col] = 'Q'
+                self.backtrack(board, row + 1)
+                board[row][col] = '.'
+
+    def isSafe(self, board, row, col):
+        # Check column
+        for i in range(row):
+            if board[i][col] == 'Q':
+                return False
+        
+        # Check upper left diagonal
+        for i, j in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
+            if board[i][j] == 'Q':
+                return False
+        
+        # Check upper right diagonal
+        for i, j in zip(range(row - 1, -1, -1), range(col + 1, len(board))):
+            if board[i][j] == 'Q':
+                return False
+        
+        return True
