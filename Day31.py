@@ -1204,3 +1204,22 @@ class Solution:
                 left += 1
         
         return matrix
+# permutation sequence
+class Solution:
+    def getPermutation(self, n, k):
+        numbers = list(range(1, n + 1))
+        factorials = [1] * n
+        
+        for i in range(1, n):
+            factorials[i] = factorials[i - 1] * i
+        
+        k -= 1  # Convert to zero-based index
+        result = []
+        
+        for i in range(n - 1, -1, -1):
+            idx = k // factorials[i]
+            result.append(str(numbers[idx]))
+            numbers.pop(idx)
+            k %= factorials[i]
+        
+        return ''.join(result)
