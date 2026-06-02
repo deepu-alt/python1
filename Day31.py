@@ -1260,3 +1260,34 @@ class Solution:
                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
         
         return dp[-1][-1]
+
+#valid number
+class Solution:
+    def isNumber(self, s):
+        s = s.strip()
+        if not s:
+            return False
+        
+        num_seen = False
+        dot_seen = False
+        e_seen = False
+        
+        for i, char in enumerate(s):
+            if char.isdigit():
+                num_seen = True
+            elif char in ['+', '-']:
+                if i > 0 and s[i - 1] not in ['e', 'E']:
+                    return False
+            elif char == '.':
+                if dot_seen or e_seen:
+                    return False
+                dot_seen = True
+            elif char in ['e', 'E']:
+                if e_seen or not num_seen:
+                    return False
+                e_seen = True
+                num_seen = False  # Reset for exponent part
+            else:
+                return False
+        
+        return num_seen
