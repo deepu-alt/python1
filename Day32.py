@@ -1,4 +1,4 @@
-iclass Solution:
+class Solution:
     def isMatch(self, s, p):
         m, n = len(s), len(p)
         
@@ -100,3 +100,15 @@ class Solution:
                 right = mid - 1
 
         return ans
+#climbing  stairn 
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+
+        first, second = 1, 2
+
+        for i in range(3, n + 1):
+            first, second = second, first + second
+
+        return second
